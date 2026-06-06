@@ -1,0 +1,2676 @@
+{
+  "triggers": [],
+  "nodes": [
+    {
+      "uid": "4fc435ac-d5ca-4f27-b1b6-53bb6459f9e9",
+      "commandName": "split",
+      "packageName": "String",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "sourceString",
+          "value": {
+            "type": "STRING",
+            "expression": "$fileName$"
+          }
+        },
+        {
+          "name": "delimiter",
+          "value": {
+            "type": "STRING",
+            "string": ","
+          }
+        },
+        {
+          "name": "isCaseSensitive",
+          "value": {
+            "type": "STRING",
+            "string": "false"
+          }
+        },
+        {
+          "name": "substrings",
+          "value": {
+            "type": "STRING",
+            "string": "ALL"
+          }
+        }
+      ],
+      "returnTo": {
+        "type": "VARIABLE",
+        "variableName": "FileNameList"
+      }
+    },
+    {
+      "uid": "9f387727-d103-448a-af56-ef83bf2c7cec",
+      "commandName": "assign",
+      "packageName": "String",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "sourceString",
+          "value": {
+            "type": "STRING",
+            "expression": "$FileNameList[0]$"
+          }
+        }
+      ],
+      "returnTo": {
+        "type": "VARIABLE",
+        "variableName": "file2"
+      }
+    },
+    {
+      "uid": "51e46f90-84b8-4c4b-8c3b-8071a49257bf",
+      "commandName": "assign",
+      "packageName": "String",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "sourceString",
+          "value": {
+            "type": "STRING",
+            "expression": "$FileNameList[1]$"
+          }
+        }
+      ],
+      "returnTo": {
+        "type": "VARIABLE",
+        "variableName": "file1"
+      }
+    },
+    {
+      "uid": "d09ddf7b-36ca-4307-a409-760423f63809",
+      "commandName": "messageBox",
+      "packageName": "MessageBox",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "title",
+          "value": {
+            "type": "STRING",
+            "string": "Automation Anywhere Enterprise Client"
+          }
+        },
+        {
+          "name": "content",
+          "value": {
+            "type": "STRING",
+            "expression": "$file1$\n$file2$"
+          }
+        },
+        {
+          "name": "scrollLines",
+          "value": {
+            "type": "NUMBER",
+            "number": "30"
+          }
+        },
+        {
+          "name": "closeMsgBox",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        }
+      ]
+    },
+    {
+      "uid": "42319d4f-75d0-417d-8437-4a0a981de04d",
+      "commandName": "OpenSpreadsheet",
+      "packageName": "Excel",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "filePath",
+          "value": {
+            "type": "FILE",
+            "expression": "file://$downloadPath$/$file1$"
+          }
+        },
+        {
+          "name": "containsHeader",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": true
+          }
+        },
+        {
+          "name": "isSpecificSheet",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        },
+        {
+          "name": "fileAccessMode",
+          "value": {
+            "type": "STRING",
+            "string": "EDIT"
+          }
+        },
+        {
+          "name": "isSecure",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        }
+      ],
+      "returnTo": {
+        "type": "SESSION",
+        "sessionName": {
+          "type": "STRING",
+          "string": "Default"
+        },
+        "sessionTarget": "LOCAL"
+      }
+    },
+    {
+      "uid": "ed7b293b-a32e-4f13-9e33-d3c192c9d258",
+      "commandName": "GetMultipleCells",
+      "packageName": "Excel",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "loopSelection",
+          "value": {
+            "type": "STRING",
+            "string": "ALL_ROWS"
+          }
+        },
+        {
+          "name": "session",
+          "value": {
+            "type": "SESSION",
+            "sessionName": {
+              "type": "STRING",
+              "string": "Default"
+            }
+          }
+        }
+      ],
+      "returnTo": {
+        "type": "VARIABLE",
+        "variableName": "dtSales"
+      }
+    },
+    {
+      "uid": "9c84653a-fa98-4228-b7ff-33d9b21dc7fb",
+      "commandName": "CloseSpreadsheet",
+      "packageName": "Excel",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "isSave",
+          "value": {
+            "boolean": true,
+            "type": "BOOLEAN"
+          }
+        },
+        {
+          "name": "session",
+          "value": {
+            "sessionName": {
+              "string": "Default",
+              "type": "STRING"
+            },
+            "type": "SESSION"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "8e0883c9-e640-4acf-bfc8-35c832c3928f",
+      "commandName": "OpenSpreadsheet",
+      "packageName": "Excel",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "filePath",
+          "value": {
+            "type": "FILE",
+            "expression": "file://$downloadPath$/$file2$"
+          }
+        },
+        {
+          "name": "containsHeader",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": true
+          }
+        },
+        {
+          "name": "isSpecificSheet",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        },
+        {
+          "name": "fileAccessMode",
+          "value": {
+            "type": "STRING",
+            "string": "EDIT"
+          }
+        },
+        {
+          "name": "isSecure",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        }
+      ],
+      "returnTo": {
+        "type": "SESSION",
+        "sessionName": {
+          "type": "STRING",
+          "string": "Default"
+        },
+        "sessionTarget": "LOCAL"
+      }
+    },
+    {
+      "uid": "d0974c9e-b5f0-47d9-b41c-82d71c45f4eb",
+      "commandName": "GetMultipleCells",
+      "packageName": "Excel",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "loopSelection",
+          "value": {
+            "type": "STRING",
+            "string": "ALL_ROWS"
+          }
+        },
+        {
+          "name": "session",
+          "value": {
+            "type": "SESSION",
+            "sessionName": {
+              "type": "STRING",
+              "string": "Default"
+            }
+          }
+        }
+      ],
+      "returnTo": {
+        "type": "VARIABLE",
+        "variableName": "dtTarget"
+      }
+    },
+    {
+      "uid": "49912526-0809-42e2-ad98-6d2acdb5d986",
+      "commandName": "CloseSpreadsheet",
+      "packageName": "Excel",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "isSave",
+          "value": {
+            "boolean": true,
+            "type": "BOOLEAN"
+          }
+        },
+        {
+          "name": "session",
+          "value": {
+            "sessionName": {
+              "string": "Default",
+              "type": "STRING"
+            },
+            "type": "SESSION"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "13447986-48ea-42ec-9a69-2dd2fdf85584",
+      "commandName": "removeDuplicateRows",
+      "packageName": "DataTable",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "table",
+          "value": {
+            "type": "VARIABLE",
+            "variableName": "dtSales"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "f3fa1f80-ad81-4634-936f-4bd9929770ef",
+      "commandName": "removeDuplicateRows",
+      "packageName": "DataTable",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "table",
+          "value": {
+            "type": "VARIABLE",
+            "variableName": "dtTarget"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "d012a966-dc9a-42c0-b5f4-995e41021c4a",
+      "commandName": "runTask",
+      "packageName": "TaskBot",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "taskbot",
+          "value": {
+            "type": "TASKBOT",
+            "taskbotInput": {
+              "type": "DICTIONARY",
+              "dictionary": [
+                {
+                  "key": "dtMaster",
+                  "value": {
+                    "type": "TABLE",
+                    "expression": "$dtSales$"
+                  }
+                },
+                {
+                  "key": "dtAttendance",
+                  "value": {
+                    "type": "TABLE",
+                    "expression": "$dtTarget$"
+                  }
+                },
+                {
+                  "key": "strMnth",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$strMnth$"
+                  }
+                },
+                {
+                  "key": "strYear",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$strYear$"
+                  }
+                },
+                {
+                  "key": "hrmail",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$hrmail$"
+                  }
+                }
+              ]
+            },
+            "taskbotFile": {
+              "type": "FILE",
+              "string": "repository:///Automation%20Anywhere/Bots/MyBots/useCase4/excelSub"
+            }
+          }
+        },
+        {
+          "name": "repeatOption",
+          "value": {
+            "type": "STRING",
+            "string": "DO_NOT_REPEAT"
+          }
+        },
+        {
+          "name": "delayNextRepetition",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        },
+        {
+          "name": "continueOnError",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "type": "NUMBER",
+      "subtype": "UNDEFINED",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "name": "SampleNumber"
+    },
+    {
+      "type": "STRING",
+      "subtype": "UNDEFINED",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "name": "SampleString"
+    },
+    {
+      "name": "fileName",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "downloadPath",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "FileNameList",
+      "description": "",
+      "type": "LIST",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "LIST",
+        "list": []
+      }
+    },
+    {
+      "name": "file1",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "file2",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "rExcelRow",
+      "description": "",
+      "type": "RECORD",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "RECORD",
+        "record": {
+          "schema": [],
+          "values": []
+        }
+      }
+    },
+    {
+      "name": "dtSales",
+      "description": "",
+      "type": "TABLE",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "defaultValue": {
+        "type": "TABLE",
+        "table": {
+          "schema": [
+            {
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            }
+          ],
+          "rows": [
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "dtTarget",
+      "description": "",
+      "type": "TABLE",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "defaultValue": {
+        "type": "TABLE",
+        "table": {
+          "schema": [
+            {
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            },
+            {
+              "name": "",
+              "type": "STRING"
+            }
+          ],
+          "rows": [
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            },
+            {
+              "values": [
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                },
+                {
+                  "type": "STRING",
+                  "string": ""
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "strMnth",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "strYear",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "hrmail",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    }
+  ],
+  "packages": [
+    {
+      "name": "DataTable",
+      "version": "4.18.0",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Excel",
+      "version": "6.23.15",
+      "settingsAttributes": []
+    },
+    {
+      "name": "MessageBox",
+      "version": "3.8.1",
+      "settingsAttributes": []
+    },
+    {
+      "name": "String",
+      "version": "5.12.2",
+      "settingsAttributes": []
+    },
+    {
+      "name": "TaskBot",
+      "version": "2.10.0-20241119-100739",
+      "settingsAttributes": []
+    }
+  ],
+  "properties": {
+    "botCodeVersion": "7",
+    "improvedNumberSupport": true,
+    "timeout": "0s",
+    "automationPriority": "PRIORITY_MEDIUM",
+    "runInChildWindow": false,
+    "runInChildWindowMode": "DESKTOP"
+  },
+  "workItemTemplateName": null
+}

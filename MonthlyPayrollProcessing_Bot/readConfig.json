@@ -1,0 +1,327 @@
+{
+  "triggers": [],
+  "nodes": [
+    {
+      "uid": "075d16ab-b0e5-4487-875d-5604f26ea989",
+      "commandName": "OpenCSVTXT",
+      "packageName": "CsvTxt",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "session",
+          "value": {
+            "type": "STRING",
+            "string": "Default"
+          }
+        },
+        {
+          "name": "filePath",
+          "value": {
+            "type": "FILE",
+            "string": "file:///E:/automationAnywhere/config.txt"
+          }
+        },
+        {
+          "name": "containsHeader",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        },
+        {
+          "name": "delimeter",
+          "value": {
+            "type": "STRING",
+            "string": "newLine"
+          }
+        },
+        {
+          "name": "trimLeadingSpace",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": true
+          }
+        },
+        {
+          "name": "trimTrailingSpace",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": true
+          }
+        },
+        {
+          "name": "encoding",
+          "value": {
+            "type": "STRING",
+            "string": "UTF-8"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "a73473c6-bf24-42e9-ba47-ea0e60ab0998",
+      "commandName": "loop.commands.start",
+      "packageName": "Loop",
+      "children": [
+        {
+          "uid": "5d422a20-b39b-4320-ab5f-b6c8769757f3",
+          "commandName": "split",
+          "packageName": "String",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceString",
+              "value": {
+                "type": "STRING",
+                "expression": "$rCsvTxtRow[0]$"
+              }
+            },
+            {
+              "name": "delimiter",
+              "value": {
+                "type": "STRING",
+                "string": "="
+              }
+            },
+            {
+              "name": "isCaseSensitive",
+              "value": {
+                "type": "STRING",
+                "string": "false"
+              }
+            },
+            {
+              "name": "substrings",
+              "value": {
+                "type": "STRING",
+                "string": "ALL"
+              }
+            }
+          ],
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "list"
+          }
+        },
+        {
+          "uid": "611103d2-5015-4508-8ab4-0b34649c67ad",
+          "commandName": "put",
+          "packageName": "Dictionary",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceMap",
+              "value": {
+                "type": "VARIABLE",
+                "variableName": "ldict"
+              }
+            },
+            {
+              "name": "key",
+              "value": {
+                "type": "STRING",
+                "expression": "$list[0]$"
+              }
+            },
+            {
+              "name": "varOrManual",
+              "value": {
+                "type": "STRING",
+                "string": "Manual"
+              }
+            },
+            {
+              "name": "subtype",
+              "value": {
+                "type": "STRING",
+                "string": "String"
+              }
+            },
+            {
+              "name": "stringVal",
+              "value": {
+                "type": "STRING",
+                "expression": "$list[1]$"
+              }
+            }
+          ]
+        }
+      ],
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "loopType",
+          "value": {
+            "type": "STRING",
+            "string": "ITERATOR"
+          }
+        },
+        {
+          "name": "iterator",
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "rCsvTxtRow"
+          },
+          "attributes": [
+            {
+              "name": "session",
+              "value": {
+                "type": "STRING",
+                "string": "Default"
+              }
+            }
+          ],
+          "value": {
+            "type": "ITERATOR",
+            "iteratorName": "iterators.csvtxt",
+            "packageName": "CsvTxt"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "8e46000f-68e4-4774-b876-13c309c7d2df",
+      "commandName": "messageBox",
+      "packageName": "MessageBox",
+      "disabled": true,
+      "attributes": [
+        {
+          "name": "title",
+          "value": {
+            "type": "STRING",
+            "string": "Automation Anywhere Enterprise Client"
+          }
+        },
+        {
+          "name": "content",
+          "value": {
+            "type": "STRING",
+            "expression": "$ldict{hrEmail}$\n$ldict{logPath}$\n$ldict{emailUsername}$\n$ldict{imap}$\n$ldict{port}$\n$ldict{smtp}$\n$ldict{smtpport}$\n$ldict{downloadPath}$\n\n\n\n"
+          }
+        },
+        {
+          "name": "scrollLines",
+          "value": {
+            "type": "NUMBER",
+            "number": "30"
+          }
+        },
+        {
+          "name": "closeMsgBox",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "type": "NUMBER",
+      "subtype": "UNDEFINED",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "name": "SampleNumber"
+    },
+    {
+      "type": "STRING",
+      "subtype": "UNDEFINED",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "name": "SampleString"
+    },
+    {
+      "name": "rCsvTxtRow",
+      "description": "",
+      "type": "RECORD",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "RECORD",
+        "record": {
+          "schema": [],
+          "values": []
+        }
+      }
+    },
+    {
+      "name": "list",
+      "description": "",
+      "type": "LIST",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "LIST",
+        "list": []
+      }
+    },
+    {
+      "name": "ldict",
+      "description": "",
+      "type": "DICTIONARY",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "DICTIONARY",
+        "dictionary": []
+      }
+    },
+    {
+      "name": "dList",
+      "description": "",
+      "type": "DICTIONARY",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "DICTIONARY",
+        "dictionary": []
+      }
+    }
+  ],
+  "packages": [
+    {
+      "name": "CsvTxt",
+      "version": "2.15.1",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Dictionary",
+      "version": "3.16.2",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Loop",
+      "version": "3.10.0-20251030-061555",
+      "settingsAttributes": []
+    },
+    {
+      "name": "MessageBox",
+      "version": "3.8.1",
+      "settingsAttributes": []
+    },
+    {
+      "name": "String",
+      "version": "5.12.2",
+      "settingsAttributes": []
+    }
+  ],
+  "properties": {
+    "botCodeVersion": "7",
+    "improvedNumberSupport": true,
+    "timeout": "0s",
+    "automationPriority": "PRIORITY_MEDIUM",
+    "runInChildWindow": false,
+    "runInChildWindowMode": "DESKTOP"
+  },
+  "workItemTemplateName": null
+}

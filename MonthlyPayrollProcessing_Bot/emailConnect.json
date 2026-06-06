@@ -1,0 +1,1441 @@
+{
+  "triggers": [],
+  "nodes": [
+    {
+      "uid": "12a517be-32b3-47fc-91d5-e8eaf841911a",
+      "commandName": "messageBox",
+      "packageName": "MessageBox",
+      "disabled": true,
+      "attributes": [
+        {
+          "name": "title",
+          "value": {
+            "type": "STRING",
+            "string": "Automation Anywhere Enterprise Client"
+          }
+        },
+        {
+          "name": "content",
+          "value": {
+            "type": "STRING",
+            "expression": "$imap$\n$port$\n$smtp$\n$smtpport$"
+          }
+        },
+        {
+          "name": "scrollLines",
+          "value": {
+            "type": "NUMBER",
+            "number": "30"
+          }
+        },
+        {
+          "name": "closeMsgBox",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        }
+      ]
+    },
+    {
+      "uid": "357a16ff-f52d-467e-bf47-a2f4f2bc4d2e",
+      "commandName": "emailConnect",
+      "packageName": "Email",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "session",
+          "value": {
+            "type": "STRING",
+            "string": "EmailSession"
+          }
+        },
+        {
+          "name": "serverType",
+          "value": {
+            "type": "STRING",
+            "string": "EMAIL_SERVER"
+          }
+        },
+        {
+          "name": "useSecure",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        },
+        {
+          "name": "serverHost",
+          "value": {
+            "type": "STRING",
+            "expression": "$imap$"
+          }
+        },
+        {
+          "name": "port",
+          "value": {
+            "type": "NUMBER",
+            "expression": "$port.String:toNumber$"
+          }
+        },
+        {
+          "name": "protocol",
+          "value": {
+            "type": "STRING",
+            "string": "IMAP"
+          }
+        },
+        {
+          "name": "emailServerAuthType",
+          "value": {
+            "type": "STRING",
+            "string": "Basic"
+          }
+        },
+        {
+          "name": "username",
+          "value": {
+            "type": "STRING",
+            "string": "devilgamer10122@gmail.com"
+          }
+        },
+        {
+          "name": "securedPassword",
+          "value": {
+            "type": "STRING",
+            "string": "zfxhqgqisdeiuuvr"
+          }
+        },
+        {
+          "name": "emailServerConnectionTimeOut",
+          "value": {
+            "type": "NUMBER",
+            "number": "120"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "0de04c94-8c41-4f16-a740-bc9b9a934a11",
+      "commandName": "loop.commands.start",
+      "packageName": "Loop",
+      "children": [
+        {
+          "uid": "dd757a6a-5392-40c4-ad06-3e1b6a8cf149",
+          "commandName": "assign",
+          "packageName": "String",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceString",
+              "value": {
+                "type": "STRING",
+                "expression": "$EmailData{emailSubject}$"
+              }
+            }
+          ],
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "subject"
+          }
+        },
+        {
+          "uid": "d8ac114d-5442-47ce-91ca-b1eb17db31bc",
+          "commandName": "split",
+          "packageName": "String",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceString",
+              "value": {
+                "type": "STRING",
+                "expression": "$subject$"
+              }
+            },
+            {
+              "name": "delimiter",
+              "value": {
+                "type": "STRING",
+                "string": "–"
+              }
+            },
+            {
+              "name": "isCaseSensitive",
+              "value": {
+                "type": "STRING",
+                "string": "false"
+              }
+            },
+            {
+              "name": "substrings",
+              "value": {
+                "type": "STRING",
+                "string": "ALL"
+              }
+            }
+          ],
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "list"
+          }
+        },
+        {
+          "uid": "f2155a13-3d6b-41a1-a6f5-d16ce72081c0",
+          "commandName": "split",
+          "packageName": "String",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceString",
+              "value": {
+                "type": "STRING",
+                "expression": "$list[1]$"
+              }
+            },
+            {
+              "name": "delimiter",
+              "value": {
+                "type": "STRING",
+                "string": " "
+              }
+            },
+            {
+              "name": "isCaseSensitive",
+              "value": {
+                "type": "STRING",
+                "string": "false"
+              }
+            },
+            {
+              "name": "substrings",
+              "value": {
+                "type": "STRING",
+                "string": "ALL"
+              }
+            }
+          ],
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "MounthAndYear"
+          }
+        },
+        {
+          "uid": "577fa2bb-abb7-4ec0-a37e-ca4f6287a7c9",
+          "commandName": "assign",
+          "packageName": "String",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceString",
+              "value": {
+                "type": "STRING",
+                "expression": "$MounthAndYear[1]$"
+              }
+            }
+          ],
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "strMnth"
+          }
+        },
+        {
+          "uid": "2b787616-8014-4b84-a83c-e88844261902",
+          "commandName": "assign",
+          "packageName": "String",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceString",
+              "value": {
+                "type": "STRING",
+                "expression": "$MounthAndYear[2]$"
+              }
+            }
+          ],
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "strYear"
+          }
+        },
+        {
+          "uid": "2a7f141d-4c78-4486-ae29-13ddd4e66bcc",
+          "commandName": "messageBox",
+          "packageName": "MessageBox",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "title",
+              "value": {
+                "type": "STRING",
+                "string": "Automation Anywhere Enterprise Client"
+              }
+            },
+            {
+              "name": "content",
+              "value": {
+                "type": "STRING",
+                "expression": "$strMnth$\n$strYear$"
+              }
+            },
+            {
+              "name": "scrollLines",
+              "value": {
+                "type": "NUMBER",
+                "number": "30"
+              }
+            },
+            {
+              "name": "closeMsgBox",
+              "value": {
+                "type": "BOOLEAN",
+                "boolean": false
+              }
+            }
+          ]
+        },
+        {
+          "uid": "9318269d-6b4c-4306-bc10-0da882df7564",
+          "commandName": "size",
+          "packageName": "Dictionary",
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "sourceMap",
+              "value": {
+                "type": "VARIABLE",
+                "variableName": "EmailData"
+              }
+            }
+          ],
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "dictsize"
+          }
+        },
+        {
+          "uid": "d653bd44-d016-4dbe-95a7-cfaed8e9b961",
+          "commandName": "if",
+          "packageName": "If",
+          "children": [
+            {
+              "uid": "16196c26-6d10-46f3-ac93-5ec3c017037a",
+              "commandName": "SendMailV2",
+              "packageName": "Email",
+              "disabled": false,
+              "attributes": [
+                {
+                  "name": "toAddress",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$hrmail$"
+                  }
+                },
+                {
+                  "name": "cc",
+                  "value": {
+                    "type": "STRING",
+                    "string": ""
+                  }
+                },
+                {
+                  "name": "bcc",
+                  "value": {
+                    "type": "STRING",
+                    "string": ""
+                  }
+                },
+                {
+                  "name": "replyTO",
+                  "value": {
+                    "type": "STRING",
+                    "string": ""
+                  }
+                },
+                {
+                  "name": "invalidAddress",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": false
+                  }
+                },
+                {
+                  "name": "importance",
+                  "value": {
+                    "type": "STRING",
+                    "string": "Normal"
+                  }
+                },
+                {
+                  "name": "subject",
+                  "value": {
+                    "type": "STRING",
+                    "string": "No email found today"
+                  }
+                },
+                {
+                  "name": "ensureAttachmentsExist",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": false
+                  }
+                },
+                {
+                  "name": "bodyFormat",
+                  "value": {
+                    "type": "STRING",
+                    "string": "PLAINTEXT"
+                  }
+                },
+                {
+                  "name": "message",
+                  "value": {
+                    "type": "STRING",
+                    "string": "There were no new email today"
+                  }
+                },
+                {
+                  "name": "goGreen",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": true
+                  }
+                },
+                {
+                  "name": "serverType",
+                  "value": {
+                    "type": "STRING",
+                    "string": "EMAIL_SERVER"
+                  }
+                },
+                {
+                  "name": "encoding",
+                  "value": {
+                    "type": "STRING",
+                    "string": "UTF-8"
+                  }
+                },
+                {
+                  "name": "fromAddress",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$email$"
+                  }
+                },
+                {
+                  "name": "useSecureConnection",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": false
+                  }
+                },
+                {
+                  "name": "emailServerHost",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$smtp$"
+                  }
+                },
+                {
+                  "name": "emailServerPort",
+                  "value": {
+                    "type": "NUMBER",
+                    "expression": "$smtpport.String:toNumber$"
+                  }
+                },
+                {
+                  "name": "requiresAuthentication",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": false
+                  }
+                },
+                {
+                  "name": "emailServerAuthType",
+                  "value": {
+                    "type": "STRING",
+                    "string": "Basic"
+                  }
+                },
+                {
+                  "name": "username",
+                  "value": {
+                    "type": "STRING",
+                    "string": "devilgamer10122@gmail.com"
+                  }
+                },
+                {
+                  "name": "securedPassword",
+                  "value": {
+                    "type": "STRING",
+                    "string": "zfxhqgqisdeiuuvr"
+                  }
+                },
+                {
+                  "name": "smtpConnectionTimeOut",
+                  "value": {
+                    "type": "NUMBER",
+                    "number": "120"
+                  }
+                }
+              ]
+            }
+          ],
+          "branches": [],
+          "disabled": false,
+          "attributes": [
+            {
+              "attributes": [
+                {
+                  "name": "variable",
+                  "value": {
+                    "type": "NUMBER",
+                    "expression": "$dictsize$"
+                  }
+                },
+                {
+                  "name": "operator",
+                  "value": {
+                    "type": "STRING",
+                    "string": "LT"
+                  }
+                },
+                {
+                  "name": "value",
+                  "value": {
+                    "type": "NUMBER",
+                    "number": "1"
+                  }
+                }
+              ],
+              "name": "condition",
+              "value": {
+                "type": "CONDITIONAL",
+                "conditionalName": "numberVariable",
+                "packageName": "Number"
+              }
+            }
+          ]
+        },
+        {
+          "uid": "98417b27-8b3b-40b6-adde-71c5cca5346b",
+          "commandName": "if",
+          "packageName": "If",
+          "children": [
+            {
+              "uid": "8ad8f404-ba5f-427a-88f0-01fd0c8da710",
+              "commandName": "SendMailV2",
+              "packageName": "Email",
+              "disabled": false,
+              "attributes": [
+                {
+                  "name": "toAddress",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$hrmail$"
+                  }
+                },
+                {
+                  "name": "cc",
+                  "value": {
+                    "type": "STRING",
+                    "string": ""
+                  }
+                },
+                {
+                  "name": "bcc",
+                  "value": {
+                    "type": "STRING",
+                    "string": ""
+                  }
+                },
+                {
+                  "name": "replyTO",
+                  "value": {
+                    "type": "STRING",
+                    "string": ""
+                  }
+                },
+                {
+                  "name": "invalidAddress",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": false
+                  }
+                },
+                {
+                  "name": "importance",
+                  "value": {
+                    "type": "STRING",
+                    "string": "Normal"
+                  }
+                },
+                {
+                  "name": "subject",
+                  "value": {
+                    "type": "STRING",
+                    "string": "Attachment Underflow"
+                  }
+                },
+                {
+                  "name": "ensureAttachmentsExist",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": true
+                  }
+                },
+                {
+                  "name": "bodyFormat",
+                  "value": {
+                    "type": "STRING",
+                    "string": "PLAINTEXT"
+                  }
+                },
+                {
+                  "name": "message",
+                  "value": {
+                    "type": "STRING",
+                    "string": "Expected two attachments"
+                  }
+                },
+                {
+                  "name": "goGreen",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": true
+                  }
+                },
+                {
+                  "name": "serverType",
+                  "value": {
+                    "type": "STRING",
+                    "string": "EMAIL_SERVER"
+                  }
+                },
+                {
+                  "name": "encoding",
+                  "value": {
+                    "type": "STRING",
+                    "string": "UTF-8"
+                  }
+                },
+                {
+                  "name": "fromAddress",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$email$"
+                  }
+                },
+                {
+                  "name": "useSecureConnection",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": false
+                  }
+                },
+                {
+                  "name": "emailServerHost",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$smtp$"
+                  }
+                },
+                {
+                  "name": "emailServerPort",
+                  "value": {
+                    "type": "NUMBER",
+                    "expression": "$smtpport.String:toNumber$"
+                  }
+                },
+                {
+                  "name": "requiresAuthentication",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": false
+                  }
+                },
+                {
+                  "name": "emailServerAuthType",
+                  "value": {
+                    "type": "STRING",
+                    "string": "Basic"
+                  }
+                },
+                {
+                  "name": "username",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$email$"
+                  }
+                },
+                {
+                  "name": "securedPassword",
+                  "value": {
+                    "type": "CREDENTIAL",
+                    "credential": {
+                      "name": "email",
+                      "lockerName": "emailLocker",
+                      "attributeName": "password"
+                    }
+                  }
+                },
+                {
+                  "name": "smtpConnectionTimeOut",
+                  "value": {
+                    "type": "NUMBER",
+                    "number": "120"
+                  }
+                }
+              ]
+            }
+          ],
+          "branches": [],
+          "disabled": false,
+          "attributes": [
+            {
+              "attributes": [
+                {
+                  "name": "variable",
+                  "value": {
+                    "type": "NUMBER",
+                    "expression": "$EmailData{emailNoOfAttachments}.String:toNumber$"
+                  }
+                },
+                {
+                  "name": "operator",
+                  "value": {
+                    "type": "STRING",
+                    "string": "LT"
+                  }
+                },
+                {
+                  "name": "value",
+                  "value": {
+                    "type": "NUMBER",
+                    "number": "2"
+                  }
+                }
+              ],
+              "name": "condition",
+              "value": {
+                "type": "CONDITIONAL",
+                "conditionalName": "numberVariable",
+                "packageName": "Number"
+              }
+            }
+          ]
+        },
+        {
+          "uid": "189cba61-1987-4733-8883-57a3ca0f85c5",
+          "commandName": "if",
+          "packageName": "If",
+          "children": [
+            {
+              "uid": "66013ba1-7683-4910-a03f-faedc2c771e5",
+              "commandName": "saveAttachment",
+              "packageName": "Email",
+              "disabled": false,
+              "attributes": [
+                {
+                  "name": "folderPath",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$downloadFolerPath$"
+                  }
+                },
+                {
+                  "name": "checkOverrwrite",
+                  "value": {
+                    "type": "BOOLEAN",
+                    "boolean": true
+                  }
+                }
+              ]
+            },
+            {
+              "uid": "0fd521cf-9787-4392-804f-6cc519e33781",
+              "commandName": "delay",
+              "packageName": "Delay",
+              "disabled": false,
+              "attributes": [
+                {
+                  "name": "delayType",
+                  "value": {
+                    "type": "STRING",
+                    "string": "REGULAR"
+                  }
+                },
+                {
+                  "name": "delayTime",
+                  "value": {
+                    "type": "NUMBER",
+                    "number": "10"
+                  }
+                },
+                {
+                  "name": "timeUnit",
+                  "value": {
+                    "type": "STRING",
+                    "string": "SECONDS"
+                  }
+                }
+              ]
+            }
+          ],
+          "branches": [],
+          "disabled": false,
+          "attributes": [
+            {
+              "attributes": [
+                {
+                  "name": "folderPath",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$downloadFolerPath$"
+                  }
+                },
+                {
+                  "name": "waitTimeout",
+                  "value": {
+                    "type": "NUMBER",
+                    "number": "0"
+                  }
+                }
+              ],
+              "name": "condition",
+              "value": {
+                "type": "CONDITIONAL",
+                "conditionalName": "folderExists",
+                "packageName": "Folder"
+              }
+            }
+          ]
+        },
+        {
+          "uid": "615942e4-15e5-4404-a88f-39bac32e4994",
+          "commandName": "loop.commands.start",
+          "packageName": "Loop",
+          "children": [
+            {
+              "uid": "29feff5b-23ff-43f9-b0eb-e97f9ab7982f",
+              "commandName": "assign",
+              "packageName": "String",
+              "disabled": false,
+              "attributes": [
+                {
+                  "name": "sourceString",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$dFilesInFolder{name}$"
+                  }
+                }
+              ],
+              "returnTo": {
+                "type": "VARIABLE",
+                "variableName": "fileNameNoExtension"
+              }
+            },
+            {
+              "uid": "6456a509-7666-449d-90ec-c0d18128a71a",
+              "commandName": "assign",
+              "packageName": "String",
+              "disabled": false,
+              "attributes": [
+                {
+                  "name": "sourceString",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$dFilesInFolder{extension}$"
+                  }
+                }
+              ],
+              "returnTo": {
+                "type": "VARIABLE",
+                "variableName": "ExtensionOnly"
+              }
+            },
+            {
+              "uid": "3c676ec5-aa41-4ebe-ad0a-eea3c7474874",
+              "commandName": "if",
+              "packageName": "If",
+              "children": [
+                {
+                  "uid": "58d36153-4648-4760-8335-0e9502d630fc",
+                  "commandName": "assign",
+                  "packageName": "String",
+                  "disabled": false,
+                  "attributes": [
+                    {
+                      "name": "sourceString",
+                      "value": {
+                        "type": "STRING",
+                        "expression": "$dFilesInFolder{name}$.$dFilesInFolder{extension}$"
+                      }
+                    }
+                  ],
+                  "returnTo": {
+                    "type": "VARIABLE",
+                    "variableName": "FullFileName"
+                  }
+                }
+              ],
+              "branches": [
+                {
+                  "uid": "3cb4ad46-aa21-4d99-8aac-ccd8de5469c0",
+                  "commandName": "else",
+                  "packageName": "If",
+                  "children": [
+                    {
+                      "uid": "aabe9049-c762-47ff-bae4-f3971f656e9f",
+                      "commandName": "assign",
+                      "packageName": "String",
+                      "disabled": false,
+                      "attributes": [
+                        {
+                          "name": "sourceString",
+                          "value": {
+                            "type": "STRING",
+                            "expression": "$FullFileName$,$dFilesInFolder{name}$.$dFilesInFolder{extension}$"
+                          }
+                        }
+                      ],
+                      "returnTo": {
+                        "type": "VARIABLE",
+                        "variableName": "FullFileName"
+                      }
+                    }
+                  ],
+                  "disabled": false
+                }
+              ],
+              "disabled": false,
+              "attributes": [
+                {
+                  "attributes": [
+                    {
+                      "name": "variable",
+                      "value": {
+                        "type": "STRING",
+                        "expression": "$FullFileName$"
+                      }
+                    },
+                    {
+                      "name": "operator",
+                      "value": {
+                        "type": "STRING",
+                        "string": "EQ"
+                      }
+                    },
+                    {
+                      "name": "value",
+                      "value": {
+                        "type": "STRING",
+                        "string": ""
+                      }
+                    },
+                    {
+                      "name": "matchCase",
+                      "value": {
+                        "type": "BOOLEAN",
+                        "boolean": false
+                      }
+                    },
+                    {
+                      "name": "isIgnoreCarriage",
+                      "value": {
+                        "type": "BOOLEAN",
+                        "boolean": false
+                      }
+                    }
+                  ],
+                  "name": "condition",
+                  "value": {
+                    "type": "CONDITIONAL",
+                    "conditionalName": "stringVariable",
+                    "packageName": "String"
+                  }
+                }
+              ]
+            }
+          ],
+          "disabled": false,
+          "attributes": [
+            {
+              "name": "loopType",
+              "value": {
+                "type": "STRING",
+                "string": "ITERATOR"
+              }
+            },
+            {
+              "name": "iterator",
+              "returnTo": {
+                "type": "VARIABLE",
+                "variableName": "dFilesInFolder"
+              },
+              "attributes": [
+                {
+                  "name": "folderPath",
+                  "value": {
+                    "type": "STRING",
+                    "expression": "$downloadFolerPath$"
+                  }
+                }
+              ],
+              "value": {
+                "type": "ITERATOR",
+                "iteratorName": "loop.iterators.files",
+                "packageName": "File"
+              }
+            }
+          ]
+        }
+      ],
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "loopType",
+          "value": {
+            "type": "STRING",
+            "string": "ITERATOR"
+          }
+        },
+        {
+          "name": "iterator",
+          "returnTo": {
+            "type": "VARIABLE",
+            "variableName": "EmailData"
+          },
+          "attributes": [
+            {
+              "name": "sessionName",
+              "value": {
+                "type": "STRING",
+                "string": "EmailSession"
+              }
+            },
+            {
+              "name": "readStatus",
+              "value": {
+                "type": "STRING",
+                "string": "ALL"
+              }
+            },
+            {
+              "name": "enableStatusNoUpdate",
+              "value": {
+                "type": "BOOLEAN",
+                "boolean": false
+              }
+            },
+            {
+              "name": "sortBy",
+              "value": {
+                "type": "STRING",
+                "string": "LATEST_FIRST"
+              }
+            },
+            {
+              "name": "folder",
+              "value": {
+                "type": "STRING",
+                "string": "Inbox"
+              }
+            },
+            {
+              "name": "subject",
+              "value": {
+                "type": "STRING",
+                "string": "Process Payroll"
+              }
+            },
+            {
+              "name": "from",
+              "value": {
+                "type": "STRING",
+                "string": ""
+              }
+            },
+            {
+              "name": "messageFormat",
+              "value": {
+                "type": "STRING",
+                "string": "PLAINTEXT"
+              }
+            },
+            {
+              "name": "isToUseLocalTimezone",
+              "value": {
+                "type": "BOOLEAN",
+                "boolean": true
+              }
+            }
+          ],
+          "value": {
+            "type": "ITERATOR",
+            "iteratorName": "loop.iterators.email",
+            "packageName": "Email"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "08ed9104-1720-4f26-ae62-28d3baa95552",
+      "commandName": "messageBox",
+      "packageName": "MessageBox",
+      "disabled": false,
+      "attributes": [
+        {
+          "name": "title",
+          "value": {
+            "type": "STRING",
+            "string": "Automation Anywhere Enterprise Client"
+          }
+        },
+        {
+          "name": "content",
+          "value": {
+            "type": "STRING",
+            "expression": "$fileNameNoExtension$\n$ExtensionOnly$\n$FullFileName$"
+          }
+        },
+        {
+          "name": "scrollLines",
+          "value": {
+            "type": "NUMBER",
+            "number": "30"
+          }
+        },
+        {
+          "name": "closeMsgBox",
+          "value": {
+            "type": "BOOLEAN",
+            "boolean": false
+          }
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "type": "NUMBER",
+      "subtype": "UNDEFINED",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "name": "SampleNumber"
+    },
+    {
+      "type": "STRING",
+      "subtype": "UNDEFINED",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "name": "SampleString"
+    },
+    {
+      "name": "imap",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "port",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "smtp",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "smtpport",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "EmailData",
+      "description": "",
+      "type": "DICTIONARY",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "DICTIONARY",
+        "dictionary": []
+      }
+    },
+    {
+      "name": "dictsize",
+      "description": "",
+      "type": "NUMBER",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "NUMBER",
+        "number": "0"
+      }
+    },
+    {
+      "name": "date",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "timestamp",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "downloadFolerPath",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "email",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "hrmail",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": true,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "list",
+      "description": "",
+      "type": "LIST",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "LIST",
+        "list": []
+      }
+    },
+    {
+      "name": "MounthAndYear",
+      "description": "",
+      "type": "LIST",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "LIST",
+        "list": []
+      }
+    },
+    {
+      "name": "strMnth",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "strYear",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "dFilesInFolder",
+      "description": "",
+      "type": "DICTIONARY",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "subtype": "STRING",
+      "defaultValue": {
+        "type": "DICTIONARY",
+        "dictionary": []
+      }
+    },
+    {
+      "name": "fileNameNoExtension",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "ExtensionOnly",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "FullFileName",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": true,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    },
+    {
+      "name": "subject",
+      "description": "",
+      "type": "STRING",
+      "readOnly": false,
+      "input": false,
+      "output": false,
+      "defaultValue": {
+        "type": "STRING",
+        "string": ""
+      }
+    }
+  ],
+  "packages": [
+    {
+      "name": "Delay",
+      "version": "3.10.0",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Dictionary",
+      "version": "3.16.2",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Email",
+      "version": "3.33.5",
+      "settingsAttributes": []
+    },
+    {
+      "name": "File",
+      "version": "6.14.2",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Folder",
+      "version": "6.13.0",
+      "settingsAttributes": []
+    },
+    {
+      "name": "If",
+      "version": "3.8.0-20241115-115929",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Loop",
+      "version": "3.10.0-20251030-061555",
+      "settingsAttributes": []
+    },
+    {
+      "name": "MessageBox",
+      "version": "3.8.1",
+      "settingsAttributes": []
+    },
+    {
+      "name": "Number",
+      "version": "3.11.3",
+      "settingsAttributes": []
+    },
+    {
+      "name": "String",
+      "version": "5.12.2",
+      "settingsAttributes": []
+    }
+  ],
+  "properties": {
+    "botCodeVersion": "7",
+    "improvedNumberSupport": true,
+    "timeout": "0s",
+    "automationPriority": "PRIORITY_MEDIUM",
+    "runInChildWindow": false,
+    "runInChildWindowMode": "DESKTOP"
+  },
+  "workItemTemplateName": null
+}
